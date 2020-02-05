@@ -1,6 +1,6 @@
 object Form1: TForm1
-  Left = 231
-  Top = 151
+  Left = 215
+  Top = 127
   BorderStyle = bsToolWindow
   Caption = ' PingPong v.1.'
   ClientHeight = 471
@@ -15,6 +15,8 @@ object Form1: TForm1
   Font.Style = []
   Menu = MainMenu1
   OldCreateOrder = False
+  OnKeyDown = FormKeyDown
+  OnKeyUp = FormKeyUp
   PixelsPerInch = 96
   TextHeight = 13
   object tlo: TImage
@@ -42862,19 +42864,19 @@ object Form1: TForm1
   object ball: TShape
     Left = 264
     Top = 344
-    Width = 33
-    Height = 33
+    Width = 25
+    Height = 25
     Shape = stCircle
   end
   object p1: TShape
-    Left = 32
+    Left = 48
     Top = 200
     Width = 17
     Height = 121
     Brush.Color = clMaroon
   end
   object p2: TShape
-    Left = 976
+    Left = 952
     Top = 200
     Width = 17
     Height = 121
@@ -42910,5 +42912,33 @@ object Form1: TForm1
         end
       end
     end
+  end
+  object up1: TTimer
+    Enabled = False
+    Interval = 20
+    OnTimer = up1Timer
+    Left = 256
+    Top = 384
+  end
+  object down1: TTimer
+    Enabled = False
+    Interval = 20
+    OnTimer = down1Timer
+    Left = 256
+    Top = 416
+  end
+  object up2: TTimer
+    Enabled = False
+    Interval = 20
+    OnTimer = up2Timer
+    Left = 288
+    Top = 384
+  end
+  object down2: TTimer
+    Enabled = False
+    Interval = 20
+    OnTimer = down2Timer
+    Left = 288
+    Top = 416
   end
 end
