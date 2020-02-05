@@ -25,6 +25,12 @@ __published:	// IDE-managed Components
         TMenuItem *Informacje1;
         TMenuItem *Oprogramie1;
         TMenuItem *Autor1;
+        TLabel *namePlayer1;
+        TLabel *score;
+        TLabel *namePlayer2;
+        TShape *ball;
+        TShape *p1;
+        TShape *p2;
 private:	// User declarations
 public:		// User declarations
         __fastcall TForm1(TComponent* Owner);

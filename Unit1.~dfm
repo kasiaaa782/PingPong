@@ -2,9 +2,9 @@ object Form1: TForm1
   Left = 214
   Top = 126
   BorderStyle = bsToolWindow
-  Caption = 'PingPong v.1.'
+  Caption = ' PingPong v.1.'
   ClientHeight = 471
-  ClientWidth = 1019
+  ClientWidth = 1021
   Color = clBtnFace
   UseDockManager = True
   DockSite = True
@@ -13,6 +13,7 @@ object Form1: TForm1
   Font.Height = -11
   Font.Name = 'MS Sans Serif'
   Font.Style = []
+  Menu = MainMenu1
   OldCreateOrder = False
   PixelsPerInch = 96
   TextHeight = 13
@@ -42815,5 +42816,36 @@ object Form1: TForm1
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000FFFFFF00}
+  end
+  object MainMenu1: TMainMenu
+    Left = 216
+    Top = 416
+    object Opcje1: TMenuItem
+      Caption = 'Opcje'
+      object Opis1: TMenuItem
+        Caption = 'Opis'
+      end
+      object Zapiszgre1: TMenuItem
+        Caption = 'Zapisz gr'#281
+      end
+      object N1: TMenuItem
+        Caption = '-'
+      end
+      object Zakocz1: TMenuItem
+        Caption = 'Zako'#324'cz'
+      end
+    end
+    object Pomoc1: TMenuItem
+      Caption = 'Pomoc'
+      object Informacje1: TMenuItem
+        Caption = 'Informacje'
+        object Oprogramie1: TMenuItem
+          Caption = 'O programie'
+        end
+        object Autor1: TMenuItem
+          Caption = 'O autorze'
+        end
+      end
+    end
   end
 end

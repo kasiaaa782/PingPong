@@ -1,6 +1,6 @@
 object Form1: TForm1
-  Left = 214
-  Top = 126
+  Left = 231
+  Top = 151
   BorderStyle = bsToolWindow
   Caption = ' PingPong v.1.'
   ClientHeight = 471
@@ -42816,6 +42816,69 @@ object Form1: TForm1
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000FFFFFF00}
+  end
+  object namePlayer1: TLabel
+    Left = 24
+    Top = 16
+    Width = 72
+    Height = 25
+    Caption = 'Gracz 1'
+    Font.Charset = EASTEUROPE_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -21
+    Font.Name = 'Cambria'
+    Font.Style = [fsBold]
+    ParentFont = False
+    Transparent = True
+  end
+  object score: TLabel
+    Left = 480
+    Top = 16
+    Width = 62
+    Height = 25
+    Caption = 'Wynik'
+    Font.Charset = EASTEUROPE_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -21
+    Font.Name = 'Cambria'
+    Font.Style = [fsBold]
+    ParentFont = False
+    Transparent = True
+  end
+  object namePlayer2: TLabel
+    Left = 928
+    Top = 16
+    Width = 72
+    Height = 25
+    Caption = 'Gracz 2'
+    Font.Charset = EASTEUROPE_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -21
+    Font.Name = 'Cambria'
+    Font.Style = [fsBold]
+    ParentFont = False
+    Transparent = True
+  end
+  object ball: TShape
+    Left = 264
+    Top = 344
+    Width = 33
+    Height = 33
+    Shape = stCircle
+  end
+  object p1: TShape
+    Left = 32
+    Top = 200
+    Width = 17
+    Height = 121
+    Brush.Color = clMaroon
+  end
+  object p2: TShape
+    Left = 976
+    Top = 200
+    Width = 17
+    Height = 121
+    Brush.Color = clMaroon
   end
   object MainMenu1: TMainMenu
     Left = 216
