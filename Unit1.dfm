@@ -1,9 +1,9 @@
 object Form1: TForm1
-  Left = 215
-  Top = 127
+  Left = 210
+  Top = 185
   BorderStyle = bsToolWindow
   Caption = ' PingPong v.1.'
-  ClientHeight = 471
+  ClientHeight = 469
   ClientWidth = 1021
   Color = clBtnFace
   UseDockManager = True
@@ -19,7 +19,7 @@ object Form1: TForm1
   OnKeyUp = FormKeyUp
   PixelsPerInch = 96
   TextHeight = 13
-  object tlo: TImage
+  object table: TImage
     Left = 8
     Top = 8
     Width = 1005
@@ -42861,13 +42861,6 @@ object Form1: TForm1
     ParentFont = False
     Transparent = True
   end
-  object ball: TShape
-    Left = 264
-    Top = 344
-    Width = 25
-    Height = 25
-    Shape = stCircle
-  end
   object p1: TShape
     Left = 48
     Top = 200
@@ -42881,6 +42874,45 @@ object Form1: TForm1
     Width = 17
     Height = 121
     Brush.Color = clMaroon
+  end
+  object Label1: TLabel
+    Left = 360
+    Top = 120
+    Width = 289
+    Height = 57
+    Alignment = taCenter
+    AutoSize = False
+    Caption = 'Punkt dla gracza 1 !'
+    Font.Charset = EASTEUROPE_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -24
+    Font.Name = 'Cambria'
+    Font.Style = []
+    ParentFont = False
+    Layout = tlCenter
+    Visible = False
+  end
+  object ball: TShape
+    Left = 552
+    Top = 400
+    Width = 25
+    Height = 25
+    Shape = stCircle
+  end
+  object Button1: TButton
+    Left = 376
+    Top = 216
+    Width = 265
+    Height = 81
+    Caption = 'Nast'#281'pna runda    >'
+    Font.Charset = EASTEUROPE_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -23
+    Font.Name = 'Cambria'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 0
+    Visible = False
   end
   object MainMenu1: TMainMenu
     Left = 216
@@ -42939,6 +42971,12 @@ object Form1: TForm1
     Interval = 20
     OnTimer = down2Timer
     Left = 288
+    Top = 416
+  end
+  object ballT: TTimer
+    Interval = 10
+    OnTimer = ballTTimer
+    Left = 320
     Top = 416
   end
 end

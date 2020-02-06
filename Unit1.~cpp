@@ -8,42 +8,18 @@
 #pragma package(smart_init)
 #pragma resource "*.dfm"
 TForm1 *Form1;
+
+int x = -6;
+int y = -6;
+int player1 = 0;
+int player2 = 0;
+
 //---------------------------------------------------------------------------
 __fastcall TForm1::TForm1(TComponent* Owner)
         : TForm(Owner)
 {
 }
 //---------------------------------------------------------------------------
-
-
-
-
-
-/*
-void __fastcall TForm1::lewoTimer(TObject *Sender)
-{
-     if(paddle->Left > 10 ) paddle->Left -= 10;
-}
-//---------------------------------------------------------------------------
-void __fastcall TForm1::prawoTimer(TObject *Sender)
-{
-     if(paddle->Left + paddle->Width < tlo->Width - 10 ) paddle->Left += 10;
-}
-//---------------------------------------------------------------------------
-void __fastcall TForm1::FormKeyDown(TObject *Sender, WORD &Key,
-      TShiftState Shift)
-{
-     if(Key == VK_LEFT) lewo->Enabled = true;
-     if(Key == VK_RIGHT) prawo->Enabled = true;
-}
-//---------------------------------------------------------------------------
-void __fastcall TForm1::FormKeyUp(TObject *Sender, WORD &Key,
-      TShiftState Shift)
-{
-     if(Key == VK_LEFT) lewo->Enabled = false;
-     if(Key == VK_RIGHT) prawo->Enabled = false;
-
-*/
 
 void __fastcall TForm1::up1Timer(TObject *Sender)
 {
@@ -89,6 +65,53 @@ void __fastcall TForm1::FormKeyUp(TObject *Sender, WORD &Key,
 }
 //---------------------------------------------------------------------------
 
+void __fastcall TForm1::ballTTimer(TObject *Sender)
+{
+      ball->Left += x;
+      ball->Top += y;
+
+      //odbij od gornej sciany
+      if(ball->Top <= tlo->Top+41) y = -y;
+      //odbij od dolnej sciany
+      if(ball->Top + ball->Height >= tlo->Top+tlo->Height) y = -y;
+
+      //rozgrywka
+      if(ball->Left < tlo->Left){
+          ballT->Enabled = false;
+          ball->Visible = false;
+          scoreInfo->Caption = "Punkt dla gracza 2 !";
+          scoreInfo->Visible = true;
+          //Sleep(2000);
+          //scoreInfo->Visible = false;
+          player2++;
+      } else if (ball->Left+ball->Width > p2->Left+40) {
+          ballT->Enabled = false;
+          ball->Visible = false;
+          scoreInfo->Caption = "Punkt dla gracza 1 !";
+          scoreInfo->Visible = true;
+          Sleep(2000);
+          scoreInfo->Visible = false;
+          player1++;
+      } else if ((ball->Left <= p1->Left+p1->Width/2 && ball->Top+ball->Height >= p1->Top
+               && ball->Top <= p1->Top + p1->Height)
+      //|| ball->Left+ball->Width/2 >= p2->Left
+      ){
+          x = -x;
+      }
+}
+//---------------------------------------------------------------------------
 
 
-
+  /*
+    //przegrana
+    if(ball->Top >= paddle->Top + paddle->Height + 15){
+        Timer_pilka->Enabled = false;
+        ball->Visible = false;
+        Button1->Caption = "Pora¿ka! Jeszcze raz?";
+        Button1->Visible = true;
+        //blokowanie ruchow paletki
+        Form1->OnKeyDown = FormKeyUp;
+    } else if (ball->Left > paddle->Left-ball->Width/2 && ball->Left < paddle->Left+paddle->Width &&
+               ball->Top+ball->Height > paddle->Top){
+               if ( y > 0 ) y = -y;
+    }             */

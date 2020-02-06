@@ -1,6 +1,6 @@
 object Form1: TForm1
-  Left = 215
-  Top = 127
+  Left = 210
+  Top = 174
   BorderStyle = bsToolWindow
   Caption = ' PingPong v.1.'
   ClientHeight = 471
@@ -42862,8 +42862,8 @@ object Form1: TForm1
     Transparent = True
   end
   object ball: TShape
-    Left = 264
-    Top = 344
+    Left = 144
+    Top = 160
     Width = 25
     Height = 25
     Shape = stCircle
@@ -42881,6 +42881,23 @@ object Form1: TForm1
     Width = 17
     Height = 121
     Brush.Color = clMaroon
+  end
+  object scoreInfo: TLabel
+    Left = 368
+    Top = 136
+    Width = 281
+    Height = 57
+    Alignment = taCenter
+    AutoSize = False
+    Caption = 'Punkt dla gracza 1 !'
+    Font.Charset = EASTEUROPE_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -24
+    Font.Name = 'Cambria'
+    Font.Style = []
+    ParentFont = False
+    Layout = tlCenter
+    Visible = False
   end
   object MainMenu1: TMainMenu
     Left = 216
@@ -42939,6 +42956,12 @@ object Form1: TForm1
     Interval = 20
     OnTimer = down2Timer
     Left = 288
+    Top = 416
+  end
+  object ballT: TTimer
+    Interval = 15
+    OnTimer = ballTTimer
+    Left = 320
     Top = 416
   end
 end

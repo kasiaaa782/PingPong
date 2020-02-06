@@ -10,11 +10,12 @@
 #include <ExtCtrls.hpp>
 #include <Graphics.hpp>
 #include <Menus.hpp>
+#include <jpeg.hpp>
 //---------------------------------------------------------------------------
 class TForm1 : public TForm
 {
 __published:	// IDE-managed Components
-        TImage *tlo;
+        TImage *table;
         TMainMenu *MainMenu1;
         TMenuItem *Opcje1;
         TMenuItem *Opis1;
@@ -28,13 +29,16 @@ __published:	// IDE-managed Components
         TLabel *namePlayer1;
         TLabel *score;
         TLabel *namePlayer2;
-        TShape *ball;
         TShape *p1;
         TShape *p2;
         TTimer *up1;
         TTimer *down1;
         TTimer *up2;
         TTimer *down2;
+        TTimer *ballT;
+        TButton *Button1;
+        TLabel *Label1;
+        TShape *ball;
         void __fastcall up1Timer(TObject *Sender);
         void __fastcall FormKeyDown(TObject *Sender, WORD &Key,
           TShiftState Shift);
@@ -43,6 +47,7 @@ __published:	// IDE-managed Components
         void __fastcall down1Timer(TObject *Sender);
         void __fastcall up2Timer(TObject *Sender);
         void __fastcall down2Timer(TObject *Sender);
+        void __fastcall ballTTimer(TObject *Sender);
 private:	// User declarations
 public:		// User declarations
         __fastcall TForm1(TComponent* Owner);
