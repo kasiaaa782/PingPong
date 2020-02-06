@@ -72,17 +72,6 @@ void __fastcall TForm1::FormKeyUp(TObject *Sender, WORD &Key,
 
 void __fastcall TForm1::ballTTimer(TObject *Sender)
 {
-      //wygrana
-      if(round > 11){
-          ballT->Enabled = false;
-          ball->Visible = false;
-          nextRound->Visible = false;
-          newGame->Visible = true;
-          if(player1 > player2){
-             Label1->Caption = "Zwyciê¿a "+namePlayer1->Caption;
-          } else Label1->Caption = "Zwyciê¿a "+namePlayer2->Caption;
-      }
-
       r = IntToStr(round);
       rNb = IntToStr(refNumber);
 
@@ -123,30 +112,52 @@ void __fastcall TForm1::ballTTimer(TObject *Sender)
           pr1 = IntToStr(player1);
           pr2 = IntToStr(player2);
           score->Caption = "Wynik "+pr1+":"+pr2;
-          Label2->Caption = "Iloœæ odbiæ: "+rNb;
-          Label3->Caption = "Runda "+r;
-          Label1->Caption = "Punkt dla gracza 2 !   >";
-          Label1->Visible = true;
-          nextRound->Visible = true;
+          if(round < 10) {
+            Label2->Caption = "Iloœæ odbiæ: "+rNb;
+            Label3->Caption = "Runda "+r;
+            Label1->Caption = "Punkt dla gracza 2!    >";
+            Label1->Visible = true;
+            nextRound->Visible = true;
+          } else {
+            nextRound->Visible = false;
+            if(player1 > player2){
+               Label1->Caption = "Brawo! Zwyciê¿a gracz 1!";
+               Label1->Visible = true;
+            } else {
+              Label1->Caption = "Brawo! Zwyciê¿a gracz 2!";
+              Label1->Visible = true;
+            }
+          }
           newGame->Visible = true;
           ballT->Enabled = false;
           ball->Visible = false;
+
       } else if (ball->Left+ball->Width > p2->Left+p2->Width) {
           sndPlaySound("snd/przegrana.wav", SND_ASYNC);
           player1++;
           pr1 = IntToStr(player1);
           pr2 = IntToStr(player2);
           score->Caption = "Wynik "+pr1+":"+pr2;
-          Label2->Caption = "Iloœæ odbiæ: "+rNb;
-          Label3->Caption = "Runda "+r;
-          Label1->Caption = "<   Punkt dla gracza 1 !";
-          Label1->Visible = true;
-          nextRound->Visible = true;
+          if(round < 10) {
+            Label2->Caption = "Iloœæ odbiæ: "+rNb;
+            Label3->Caption = "Runda "+r;
+            Label1->Caption = "<   Punkt dla gracza 1 !";
+            Label1->Visible = true;
+            nextRound->Visible = true;
+          } else {
+            nextRound->Visible = false;
+            if(player1 > player2){
+               Label1->Caption = "Brawo! Zwyciê¿a gracz 1!";
+               Label1->Visible = true;
+            } else {
+              Label1->Caption = "Brawo! Zwyciê¿a gracz 2!";
+              Label1->Visible = true;
+            }
+          }
           newGame->Visible = true;
           ballT->Enabled = false;
           ball->Visible = false;
       }
-
 }
 //---------------------------------------------------------------------------
 
@@ -155,7 +166,6 @@ void __fastcall TForm1::newGameClick(TObject *Sender)
      refNumber = 0;
      round = 1;
      r = IntToStr(round);
-     rNb = IntToStr(refNumber);
 
      p1->Top = 200;
      p2->Top = 200;
@@ -172,6 +182,7 @@ void __fastcall TForm1::newGameClick(TObject *Sender)
      ball->Visible = true;
      Label2->Caption = "Iloœæ odbiæ";
      Label3->Caption = "Runda "+r;
+     score->Caption = "Wynik";
 }
 //---------------------------------------------------------------------------
 

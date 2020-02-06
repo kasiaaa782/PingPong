@@ -42876,16 +42876,16 @@ object Form1: TForm1
     Brush.Color = clMaroon
   end
   object Label1: TLabel
-    Left = 360
-    Top = 112
-    Width = 289
-    Height = 57
+    Left = 296
+    Top = 88
+    Width = 433
+    Height = 65
     Alignment = taCenter
     AutoSize = False
     Caption = 'Zagrajmy w PingPonga !'
     Font.Charset = EASTEUROPE_CHARSET
     Font.Color = clWindowText
-    Font.Height = -24
+    Font.Height = -32
     Font.Name = 'Cambria'
     Font.Style = []
     ParentFont = False
@@ -42928,7 +42928,7 @@ object Form1: TForm1
   end
   object nextRound: TButton
     Left = 376
-    Top = 192
+    Top = 184
     Width = 265
     Height = 57
     Cursor = crHandPoint
@@ -42944,15 +42944,15 @@ object Form1: TForm1
     OnClick = nextRoundClick
   end
   object newGame: TButton
-    Left = 392
-    Top = 272
-    Width = 225
-    Height = 57
+    Left = 408
+    Top = 256
+    Width = 201
+    Height = 41
     Cursor = crHandPoint
     Caption = 'Nowa rozgrywka'
     Font.Charset = EASTEUROPE_CHARSET
     Font.Color = clWindowText
-    Font.Height = -27
+    Font.Height = -24
     Font.Name = 'Cambria'
     Font.Style = []
     ParentFont = False
