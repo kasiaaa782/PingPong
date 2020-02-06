@@ -42928,7 +42928,7 @@ object Form1: TForm1
   end
   object nextRound: TButton
     Left = 376
-    Top = 280
+    Top = 192
     Width = 265
     Height = 57
     Cursor = crHandPoint
@@ -42944,12 +42944,12 @@ object Form1: TForm1
     OnClick = nextRoundClick
   end
   object newGame: TButton
-    Left = 408
-    Top = 200
-    Width = 209
-    Height = 49
+    Left = 392
+    Top = 272
+    Width = 225
+    Height = 57
     Cursor = crHandPoint
-    Caption = 'Nowa gra'
+    Caption = 'Nowa rozgrywka'
     Font.Charset = EASTEUROPE_CHARSET
     Font.Color = clWindowText
     Font.Height = -27
