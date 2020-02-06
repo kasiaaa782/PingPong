@@ -14,7 +14,8 @@ int x = -4;
 int y = -4;
 int player1 = 0;
 int player2 = 0;
-int round = 0;
+int round = 1;
+int refNumber = 0;
 
 //---------------------------------------------------------------------------
 __fastcall TForm1::TForm1(TComponent* Owner)
@@ -87,6 +88,7 @@ void __fastcall TForm1::ballTTimer(TObject *Sender)
                }
                sndPlaySound("snd/pilka.wav", SND_ASYNC);
                x = -x;
+               refNumber++;
            }
       else if ( ball->Top > p2->Top-ball->Height/2 &&
                 ball->Top < p2->Top+p2->Height &&
@@ -97,30 +99,70 @@ void __fastcall TForm1::ballTTimer(TObject *Sender)
                    }
                    sndPlaySound("snd/pilka.wav", SND_ASYNC);
                    x = -x;
+                   refNumber++;
                }
       else if(ball->Left < p1->Left){
           sndPlaySound("snd/przegrana.wav", SND_ASYNC);
           player2++;
           ballT->Enabled = false;
           ball->Visible = false;
-          Label1->Caption = "Punkt dla gracza 2 !";
+          Label1->Caption = "Punkt dla gracza 2 !   >";
           Label1->Visible = true;
-          Button1->Visible = true;
+          nextRound->Visible = true;
+          newGame->Visible = true;
       } else if (ball->Left+ball->Width > p2->Left+p2->Width) {
           sndPlaySound("snd/przegrana.wav", SND_ASYNC);
           player1++;
           ballT->Enabled = false;
           ball->Visible = false;
-          Label1->Caption = "Punkt dla gracza 1 !";
+          Label1->Caption = "<   Punkt dla gracza 1 !";
           Label1->Visible = true;
-          Button1->Visible = true;
+          nextRound->Visible = true;
+          newGame->Visible = true;
       }
 }
 //---------------------------------------------------------------------------
 
+void __fastcall TForm1::newGameClick(TObject *Sender)
+{
+     p1->Top = 200;
+     p2->Top = 200;
+     player1 = 0;
+     player2 = 0;
+     refNumber = 0;
+     round = 1;
+     ball->Left = 500;
+     ball->Top = 300;
+     x=-4;
+     y=-4;
+     Label1->Visible = false;
+     newGame->Visible = false;
+     nextRound->Visible = false;
+     ballT->Enabled = true;
+     ball->Visible = true;
+}
+//---------------------------------------------------------------------------
 
-  /*
+void __fastcall TForm1::nextRoundClick(TObject *Sender)
+{
+     round++;
+     if(round/2 == 0){
+        ball->Left = 200;
+        ball->Top = 180;
+     }
+     p1->Top = 200;
+     p2->Top = 200;
+     ball->Left = 500;
+     ball->Top = 300;
+     x=-4;
+     y=-4;
+     Label1->Visible = false;
+     newGame->Visible = false;
+     nextRound->Visible = false;
+     ballT->Enabled = true;
+     ball->Visible = true;
+}
+//---------------------------------------------------------------------------
 
-        //blokowanie ruchow paletki
-        Form1->OnKeyDown = FormKeyUp;
-  */
+
+

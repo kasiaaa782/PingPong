@@ -1,9 +1,9 @@
 object Form1: TForm1
-  Left = 210
-  Top = 174
+  Left = 207
+  Top = 159
   BorderStyle = bsToolWindow
   Caption = ' PingPong v.1.'
-  ClientHeight = 471
+  ClientHeight = 470
   ClientWidth = 1021
   Color = clBtnFace
   UseDockManager = True
@@ -19,7 +19,7 @@ object Form1: TForm1
   OnKeyUp = FormKeyUp
   PixelsPerInch = 96
   TextHeight = 13
-  object tlo: TImage
+  object table: TImage
     Left = 8
     Top = 8
     Width = 1005
@@ -42861,13 +42861,6 @@ object Form1: TForm1
     ParentFont = False
     Transparent = True
   end
-  object ball: TShape
-    Left = 144
-    Top = 160
-    Width = 25
-    Height = 25
-    Shape = stCircle
-  end
   object p1: TShape
     Left = 48
     Top = 200
@@ -42882,14 +42875,14 @@ object Form1: TForm1
     Height = 121
     Brush.Color = clMaroon
   end
-  object scoreInfo: TLabel
-    Left = 368
-    Top = 136
-    Width = 281
+  object Label1: TLabel
+    Left = 360
+    Top = 120
+    Width = 289
     Height = 57
     Alignment = taCenter
     AutoSize = False
-    Caption = 'Punkt dla gracza 1 !'
+    Caption = 'Zagrajmy w PingPonga !'
     Font.Charset = EASTEUROPE_CHARSET
     Font.Color = clWindowText
     Font.Height = -24
@@ -42898,6 +42891,30 @@ object Form1: TForm1
     ParentFont = False
     Layout = tlCenter
     Visible = False
+  end
+  object ball: TShape
+    Left = 552
+    Top = 400
+    Width = 25
+    Height = 25
+    Shape = stCircle
+  end
+  object Button1: TButton
+    Left = 376
+    Top = 216
+    Width = 265
+    Height = 57
+    Cursor = crHandPoint
+    Caption = 'Nast'#281'pna runda   >'
+    Font.Charset = EASTEUROPE_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -23
+    Font.Name = 'Cambria'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 0
+    Visible = False
+    OnClick = Button1Click
   end
   object MainMenu1: TMainMenu
     Left = 216
@@ -42959,7 +42976,7 @@ object Form1: TForm1
     Top = 416
   end
   object ballT: TTimer
-    Interval = 15
+    Interval = 10
     OnTimer = ballTTimer
     Left = 320
     Top = 416

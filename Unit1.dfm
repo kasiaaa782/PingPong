@@ -1,9 +1,9 @@
 object Form1: TForm1
-  Left = 210
-  Top = 185
+  Left = 209
+  Top = 116
   BorderStyle = bsToolWindow
   Caption = ' PingPong v.1.'
-  ClientHeight = 469
+  ClientHeight = 470
   ClientWidth = 1021
   Color = clBtnFace
   UseDockManager = True
@@ -42834,7 +42834,7 @@ object Form1: TForm1
     Transparent = True
   end
   object score: TLabel
-    Left = 480
+    Left = 472
     Top = 16
     Width = 62
     Height = 25
@@ -42877,12 +42877,12 @@ object Form1: TForm1
   end
   object Label1: TLabel
     Left = 360
-    Top = 120
+    Top = 112
     Width = 289
     Height = 57
     Alignment = taCenter
     AutoSize = False
-    Caption = 'Punkt dla gracza 1 !'
+    Caption = 'Zagrajmy w PingPonga !'
     Font.Charset = EASTEUROPE_CHARSET
     Font.Color = clWindowText
     Font.Height = -24
@@ -42890,21 +42890,49 @@ object Form1: TForm1
     Font.Style = []
     ParentFont = False
     Layout = tlCenter
-    Visible = False
   end
   object ball: TShape
-    Left = 552
-    Top = 400
+    Left = 576
+    Top = 368
     Width = 25
     Height = 25
     Shape = stCircle
   end
-  object Button1: TButton
+  object Label2: TLabel
+    Left = 216
+    Top = 16
+    Width = 104
+    Height = 25
+    Caption = 'Ilo'#347#263' odbi'#263
+    Font.Charset = EASTEUROPE_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -21
+    Font.Name = 'Cambria'
+    Font.Style = [fsBold]
+    ParentFont = False
+    Transparent = True
+  end
+  object Label3: TLabel
+    Left = 680
+    Top = 16
+    Width = 64
+    Height = 25
+    Caption = 'Runda'
+    Font.Charset = EASTEUROPE_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -21
+    Font.Name = 'Cambria'
+    Font.Style = [fsBold]
+    ParentFont = False
+    Transparent = True
+  end
+  object nextRound: TButton
     Left = 376
-    Top = 216
+    Top = 280
     Width = 265
-    Height = 81
-    Caption = 'Nast'#281'pna runda    >'
+    Height = 57
+    Cursor = crHandPoint
+    Caption = 'Nast'#281'pna runda   >'
     Font.Charset = EASTEUROPE_CHARSET
     Font.Color = clWindowText
     Font.Height = -23
@@ -42913,6 +42941,23 @@ object Form1: TForm1
     ParentFont = False
     TabOrder = 0
     Visible = False
+    OnClick = nextRoundClick
+  end
+  object newGame: TButton
+    Left = 408
+    Top = 200
+    Width = 209
+    Height = 49
+    Cursor = crHandPoint
+    Caption = 'Nowa gra'
+    Font.Charset = EASTEUROPE_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -27
+    Font.Name = 'Cambria'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 1
+    OnClick = newGameClick
   end
   object MainMenu1: TMainMenu
     Left = 216
@@ -42974,6 +43019,7 @@ object Form1: TForm1
     Top = 416
   end
   object ballT: TTimer
+    Enabled = False
     Interval = 10
     OnTimer = ballTTimer
     Left = 320
