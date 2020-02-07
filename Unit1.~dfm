@@ -42876,10 +42876,10 @@ object Form1: TForm1
     Brush.Color = clMaroon
   end
   object Label1: TLabel
-    Left = 344
+    Left = 296
     Top = 88
-    Width = 345
-    Height = 73
+    Width = 433
+    Height = 65
     Alignment = taCenter
     AutoSize = False
     Caption = 'Zagrajmy w PingPonga !'

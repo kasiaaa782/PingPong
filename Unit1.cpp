@@ -78,6 +78,11 @@ void __fastcall TForm1::ballTTimer(TObject *Sender)
       ball->Left += x;
       ball->Top += y;
 
+      if( round%2 == 0){
+        ball->Left -= x;
+        ball->Top -= y;
+      }
+
       //odbij od gornej sciany
       if(ball->Top <= table->Top+41) y = -y;
       //odbij od dolnej sciany
