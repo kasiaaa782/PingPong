@@ -11,8 +11,8 @@
 #pragma resource "*.dfm"
 TForm1 *Form1;
 
-int x = -6;
-int y = -6;
+int x = -4;
+int y = -4;
 int player1 = 0;
 int player2 = 0;
 int round = 1;
@@ -208,8 +208,8 @@ void __fastcall TForm1::newGameClick(TObject *Sender)
      player2 = 0;
      ball->Left = 496;
      ball->Top = 240;
-     x=-6;
-     y=-6;
+     x=-4;
+     y=-4;
      Label2->Caption = "Iloœæ odbiæ";
      Label3->Caption = "Runda "+r;
      score->Caption = "Wynik";
@@ -229,8 +229,8 @@ void __fastcall TForm1::nextRoundClick(TObject *Sender)
      p2->Top = 200;
      ball->Left = 496;
      ball->Top = 240;
-     x=-6;
-     y=-6;
+     x=-4;
+     y=-4;
      Label2->Caption = "Iloœæ odbiæ";
      Label3->Caption = "Runda "+r;
      startGame();
