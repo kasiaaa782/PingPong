@@ -3,16 +3,16 @@
 <PROJECT>
   <MACROS>
     <VERSION value="BCB.06.00"/>
-    <PROJECT value="Project1.exe"/>
-    <OBJFILES value="Project1.obj Unit1.obj img\Unit2.obj"/>
-    <RESFILES value="Project1.res"/>
+    <PROJECT value="PingPong.exe"/>
+    <OBJFILES value="PingPong.obj PingPong\Unit1.obj PingPong\Unit2.obj"/>
+    <RESFILES value="PingPong.res"/>
     <DEFFILE value=""/>
-    <RESDEPEN value="$(RESFILES) Unit1.dfm img\Unit2.dfm"/>
+    <RESDEPEN value="$(RESFILES) PingPong\Unit1.dfm PingPong\Unit2.dfm"/>
     <LIBFILES value=""/>
     <LIBRARIES value=""/>
     <SPARELIBS value="vcl.lib rtl.lib"/>
     <PACKAGES value="vcl.bpi rtl.bpi vclx.bpi bcbsmp.bpi dclocx.bpi"/>
-    <PATHCPP value=".;img"/>
+    <PATHCPP value=".;PingPong;PingPong"/>
     <PATHPAS value=".;"/>
     <PATHRC value=".;"/>
     <PATHASM value=".;"/>
@@ -21,9 +21,9 @@
     <LINKER value="ilink32"/>
     <USERDEFINES value="_DEBUG"/>
     <SYSDEFINES value="_RTLDLL;NO_STRICT;USEPACKAGES"/>
-    <MAINSOURCE value="Project1.cpp"/>
-    <INCLUDEPATH value="img;&quot;C:\Program Files (x86)\Borland\CBuilder6\Projects&quot;;&quot;E:\PrzyszłyProgramista\Seminaria\20. Jak zwiększyć szybkość i satysfakcję z nauki programowania\PingPong&quot;;$(BCB)\include;$(BCB)\include\vcl"/>
-    <LIBPATH value="img;&quot;C:\Program Files (x86)\Borland\CBuilder6\Projects&quot;;&quot;E:\PrzyszłyProgramista\Seminaria\20. Jak zwiększyć szybkość i satysfakcję z nauki programowania\PingPong&quot;;$(BCB)\lib\obj;$(BCB)\lib"/>
+    <MAINSOURCE value="PingPong.cpp"/>
+    <INCLUDEPATH value="PingPong;..\img;..;&quot;C:\Users\Katarzyna Niemiec\Desktop\PingPong&quot;;img;&quot;C:\Program Files (x86)\Borland\CBuilder6\Projects&quot;;&quot;E:\PrzyszłyProgramista\Seminaria\20. Jak zwiększyć szybkość i satysfakcję z nauki programowania\PingPong&quot;;$(BCB)\include;$(BCB)\include\vcl"/>
+    <LIBPATH value="PingPong;..\img;..;&quot;C:\Users\Katarzyna Niemiec\Desktop\PingPong&quot;;img;&quot;C:\Program Files (x86)\Borland\CBuilder6\Projects&quot;;&quot;E:\PrzyszłyProgramista\Seminaria\20. Jak zwiększyć szybkość i satysfakcję z nauki programowania\PingPong&quot;;$(BCB)\lib\obj;$(BCB)\lib"/>
     <WARNINGS value="-w-par"/>
     <OTHERFILES value=""/>
   </MACROS>
@@ -43,10 +43,10 @@
     <OTHERFILES value=""/>
   </LINKER>
   <FILELIST>
-      <FILE FILENAME="Project1.res" FORMNAME="" UNITNAME="Project1.res" CONTAINERID="ResTool" DESIGNCLASS="" LOCALCOMMAND=""/>
-      <FILE FILENAME="Project1.cpp" FORMNAME="" UNITNAME="Project1" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
-      <FILE FILENAME="Unit1.cpp" FORMNAME="Form1" UNITNAME="Unit1" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
-      <FILE FILENAME="img\Unit2.cpp" FORMNAME="Form2" UNITNAME="Unit2" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="PingPong.res" FORMNAME="" UNITNAME="PingPong.res" CONTAINERID="ResTool" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="PingPong.cpp" FORMNAME="" UNITNAME="PingPong" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="PingPong\Unit1.cpp" FORMNAME="Form1" UNITNAME="Unit1" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="PingPong\Unit2.cpp" FORMNAME="Form2" UNITNAME="Unit2" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
   </FILELIST>
   <BUILDTOOLS>
   </BUILDTOOLS>

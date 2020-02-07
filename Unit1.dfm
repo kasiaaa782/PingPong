@@ -1,10 +1,10 @@
 object Form1: TForm1
-  Left = 231
-  Top = 151
-  BorderStyle = bsToolWindow
+  Left = 205
+  Top = 180
+  BorderStyle = bsSingle
   Caption = ' PingPong v.1.'
-  ClientHeight = 471
-  ClientWidth = 1021
+  ClientHeight = 470
+  ClientWidth = 1019
   Color = clBtnFace
   UseDockManager = True
   DockSite = True
@@ -15,9 +15,12 @@ object Form1: TForm1
   Font.Style = []
   Menu = MainMenu1
   OldCreateOrder = False
+  OnCreate = FormCreate
+  OnKeyDown = FormKeyDown
+  OnKeyUp = FormKeyUp
   PixelsPerInch = 96
   TextHeight = 13
-  object tlo: TImage
+  object table: TImage
     Left = 8
     Top = 8
     Width = 1005
@@ -42832,7 +42835,7 @@ object Form1: TForm1
     Transparent = True
   end
   object score: TLabel
-    Left = 480
+    Left = 472
     Top = 16
     Width = 62
     Height = 25
@@ -42859,26 +42862,103 @@ object Form1: TForm1
     ParentFont = False
     Transparent = True
   end
-  object ball: TShape
-    Left = 264
-    Top = 344
-    Width = 33
-    Height = 33
-    Shape = stCircle
-  end
   object p1: TShape
-    Left = 32
+    Left = 48
     Top = 200
     Width = 17
     Height = 121
     Brush.Color = clMaroon
   end
   object p2: TShape
-    Left = 976
+    Left = 952
     Top = 200
     Width = 17
     Height = 121
     Brush.Color = clMaroon
+  end
+  object Label1: TLabel
+    Left = 296
+    Top = 88
+    Width = 433
+    Height = 65
+    Alignment = taCenter
+    AutoSize = False
+    Caption = 'Zagrajmy w PingPonga !'
+    Font.Charset = EASTEUROPE_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -32
+    Font.Name = 'Cambria'
+    Font.Style = []
+    ParentFont = False
+    Layout = tlCenter
+  end
+  object ball: TShape
+    Left = 496
+    Top = 240
+    Width = 25
+    Height = 25
+    Shape = stCircle
+  end
+  object Label2: TLabel
+    Left = 216
+    Top = 16
+    Width = 104
+    Height = 25
+    Caption = 'Ilo'#347#263' odbi'#263
+    Font.Charset = EASTEUROPE_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -21
+    Font.Name = 'Cambria'
+    Font.Style = [fsBold]
+    ParentFont = False
+    Transparent = True
+  end
+  object Label3: TLabel
+    Left = 680
+    Top = 16
+    Width = 64
+    Height = 25
+    Caption = 'Runda'
+    Font.Charset = EASTEUROPE_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -21
+    Font.Name = 'Cambria'
+    Font.Style = [fsBold]
+    ParentFont = False
+    Transparent = True
+  end
+  object nextRound: TButton
+    Left = 376
+    Top = 176
+    Width = 265
+    Height = 57
+    Cursor = crHandPoint
+    Caption = 'Nast'#281'pna runda   >'
+    Font.Charset = EASTEUROPE_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -23
+    Font.Name = 'Cambria'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 0
+    Visible = False
+    OnClick = nextRoundClick
+  end
+  object newGame: TButton
+    Left = 408
+    Top = 272
+    Width = 201
+    Height = 41
+    Cursor = crHandPoint
+    Caption = 'Nowa rozgrywka'
+    Font.Charset = EASTEUROPE_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -24
+    Font.Name = 'Cambria'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 1
+    OnClick = newGameClick
   end
   object MainMenu1: TMainMenu
     Left = 216
@@ -42887,15 +42967,14 @@ object Form1: TForm1
       Caption = 'Opcje'
       object Opis1: TMenuItem
         Caption = 'Opis'
+        OnClick = Opis1Click
       end
       object Zapiszgre1: TMenuItem
-        Caption = 'Zapisz gr'#281
-      end
-      object N1: TMenuItem
         Caption = '-'
       end
-      object Zakocz1: TMenuItem
+      object N1: TMenuItem
         Caption = 'Zako'#324'cz'
+        OnClick = N1Click
       end
     end
     object Pomoc1: TMenuItem
@@ -42904,11 +42983,48 @@ object Form1: TForm1
         Caption = 'Informacje'
         object Oprogramie1: TMenuItem
           Caption = 'O programie'
+          OnClick = Oprogramie1Click
         end
         object Autor1: TMenuItem
           Caption = 'O autorze'
+          OnClick = Autor1Click
         end
       end
     end
+  end
+  object up1: TTimer
+    Enabled = False
+    Interval = 20
+    OnTimer = up1Timer
+    Left = 256
+    Top = 384
+  end
+  object down1: TTimer
+    Enabled = False
+    Interval = 20
+    OnTimer = down1Timer
+    Left = 256
+    Top = 416
+  end
+  object up2: TTimer
+    Enabled = False
+    Interval = 20
+    OnTimer = up2Timer
+    Left = 288
+    Top = 384
+  end
+  object down2: TTimer
+    Enabled = False
+    Interval = 20
+    OnTimer = down2Timer
+    Left = 288
+    Top = 416
+  end
+  object ballT: TTimer
+    Enabled = False
+    Interval = 10
+    OnTimer = ballTTimer
+    Left = 320
+    Top = 416
   end
 end
