@@ -1,6 +1,6 @@
 object Form1: TForm1
-  Left = 232
-  Top = 142
+  Left = 205
+  Top = 180
   BorderStyle = bsSingle
   Caption = ' PingPong v.1.'
   ClientHeight = 470
@@ -15,6 +15,7 @@ object Form1: TForm1
   Font.Style = []
   Menu = MainMenu1
   OldCreateOrder = False
+  OnCreate = FormCreate
   OnKeyDown = FormKeyDown
   OnKeyUp = FormKeyUp
   PixelsPerInch = 96
@@ -42966,6 +42967,7 @@ object Form1: TForm1
       Caption = 'Opcje'
       object Opis1: TMenuItem
         Caption = 'Opis'
+        OnClick = Opis1Click
       end
       object Zapiszgre1: TMenuItem
         Caption = '-'

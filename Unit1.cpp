@@ -19,6 +19,19 @@ int round = 1;
 int refNumber = 0;
 AnsiString r, rNb, pr1, pr2;
 
+void showGameDescription(){
+     ShowMessage(
+       "Witaj w grze PingPong! \n \n"
+       "Lewy gracz steruje wciskaj¹c klawisze A oraz Z. \n"
+       "Prawy gracz steruje wciskaj¹c strza³ki do góry i w dó³. \n \n"
+       "Dla urozmaicenia zabawy: \n"
+       "Kiedy odbijesz pi³kê na œrodku paletki, wówczas zmienisz jej k¹t odbicia i przyœpieszy. \n"
+       "Im d³u¿ej odbijasz, tym pi³ka szybciej przemieszcza siê. \n"
+       "Rozgrywka trwa 10 rund. \n \n"
+       "Mi³ej zabawy! "
+     );
+}
+
 void startGame(){
      Form1->Label1->Visible = false;
      Form1->newGame->Visible = false;
@@ -239,5 +252,18 @@ void __fastcall TForm1::N1Click(TObject *Sender)
      Application->Terminate();
 }
 //---------------------------------------------------------------------------
+
+void __fastcall TForm1::FormCreate(TObject *Sender)
+{
+     showGameDescription();
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TForm1::Opis1Click(TObject *Sender)
+{
+     showGameDescription();
+}
+//---------------------------------------------------------------------------
+
 
 
