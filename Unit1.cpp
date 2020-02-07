@@ -122,9 +122,11 @@ void __fastcall TForm1::ballTTimer(TObject *Sender)
            ball->Top < p1->Top+p1->Height &&
            ball->Left <= p1->Left+p1->Width){
                if(ball->Top > p1->Top+40 && ball->Top+ball->Height < p1->Top+p1->Height-40){
-                   x = 1.5*x;
-                   y = 1.5*y;
+                   x = 1.4*x;
+                   y = 1.4*y;
                }
+               x = 1.1*x;
+               y = 1.1*y;
                sndPlaySound("snd/pilka.wav", SND_ASYNC);
                x = -x;
                refNumber++;
@@ -133,9 +135,11 @@ void __fastcall TForm1::ballTTimer(TObject *Sender)
                 ball->Top < p2->Top+p2->Height &&
                 ball->Left+ball->Width >= p2->Left ){
                    if(ball->Top > p2->Top+40 && ball->Top+ball->Height < p1->Top+p1->Height-40){
-                      x = 1.5*x;
-                      y = 1.5*y;
+                      x = 1.4*x;
+                      y = 1.4*y;
                    }
+                   x = 1.1*x;
+                   y = 1.1*y;
                    sndPlaySound("snd/pilka.wav", SND_ASYNC);
                    x = -x;
                    refNumber++;
@@ -220,7 +224,7 @@ void __fastcall TForm1::nextRoundClick(TObject *Sender)
 {
      round++;
      r = IntToStr(round);
-
+     refNumber = 0;
      p1->Top = 200;
      p2->Top = 200;
      ball->Left = 496;
