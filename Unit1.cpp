@@ -18,6 +18,20 @@ int round = 1;
 int refNumber = 0;
 AnsiString r, rNb, pr1, pr2;
 
+void startGame(){
+     Form1->Label1->Visible = false;
+     Form1->newGame->Visible = false;
+     Form1->nextRound->Visible = false;
+     Form1->ballT->Enabled = true;
+     Form1->ball->Visible = true;
+}
+
+void stopGame(AnsiString rr, AnsiString rrNb){
+     Form1->Label2->Caption = "Iloœæ odbiæ: "+rrNb;
+     Form1->Label3->Caption = "Runda "+rr;
+     Form1->Label1->Visible = true;
+     Form1->nextRound->Visible = true;
+}
 
 //---------------------------------------------------------------------------
 __fastcall TForm1::TForm1(TComponent* Owner)
@@ -75,12 +89,13 @@ void __fastcall TForm1::ballTTimer(TObject *Sender)
       r = IntToStr(round);
       rNb = IntToStr(refNumber);
 
-      ball->Left += x;
-      ball->Top += y;
-
-      if( round%2 == 0){
-        ball->Left -= x;
-        ball->Top -= y;
+      //zmiana kierunku pi³ki
+      if(round%2 == 0 ){
+         ball->Left -= x;
+         ball->Top -= y;
+      } else {
+         ball->Left += x;
+         ball->Top += y;
       }
 
       //odbij od gornej sciany
@@ -118,20 +133,16 @@ void __fastcall TForm1::ballTTimer(TObject *Sender)
           pr2 = IntToStr(player2);
           score->Caption = "Wynik "+pr1+":"+pr2;
           if(round < 10) {
-            Label2->Caption = "Iloœæ odbiæ: "+rNb;
-            Label3->Caption = "Runda "+r;
             Label1->Caption = "Punkt dla gracza 2!    >";
-            Label1->Visible = true;
-            nextRound->Visible = true;
+            stopGame(r, rNb);
           } else {
             nextRound->Visible = false;
             if(player1 > player2){
                Label1->Caption = "Brawo! Zwyciê¿a gracz 1!";
-               Label1->Visible = true;
             } else {
               Label1->Caption = "Brawo! Zwyciê¿a gracz 2!";
-              Label1->Visible = true;
             }
+            Label1->Visible = true;
           }
           newGame->Visible = true;
           ballT->Enabled = false;
@@ -144,21 +155,18 @@ void __fastcall TForm1::ballTTimer(TObject *Sender)
           pr2 = IntToStr(player2);
           score->Caption = "Wynik "+pr1+":"+pr2;
           if(round < 10) {
-            Label2->Caption = "Iloœæ odbiæ: "+rNb;
-            Label3->Caption = "Runda "+r;
             Label1->Caption = "<   Punkt dla gracza 1 !";
-            Label1->Visible = true;
-            nextRound->Visible = true;
+            stopGame(r, rNb);
           } else {
             nextRound->Visible = false;
             if(player1 > player2){
                Label1->Caption = "Brawo! Zwyciê¿a gracz 1!";
-               Label1->Visible = true;
             } else {
               Label1->Caption = "Brawo! Zwyciê¿a gracz 2!";
-              Label1->Visible = true;
             }
+            Label1->Visible = true;
           }
+
           newGame->Visible = true;
           ballT->Enabled = false;
           ball->Visible = false;
@@ -176,18 +184,14 @@ void __fastcall TForm1::newGameClick(TObject *Sender)
      p2->Top = 200;
      player1 = 0;
      player2 = 0;
-     ball->Left = 500;
-     ball->Top = 300;
+     ball->Left = 496;
+     ball->Top = 240;
      x=-6;
      y=-6;
-     Label1->Visible = false;
-     newGame->Visible = false;
-     nextRound->Visible = false;
-     ballT->Enabled = true;
-     ball->Visible = true;
      Label2->Caption = "Iloœæ odbiæ";
      Label3->Caption = "Runda "+r;
      score->Caption = "Wynik";
+     startGame();
 }
 //---------------------------------------------------------------------------
 
@@ -198,19 +202,16 @@ void __fastcall TForm1::nextRoundClick(TObject *Sender)
 
      p1->Top = 200;
      p2->Top = 200;
-     ball->Left = 500;
-     ball->Top = 300;
+     ball->Left = 496;
+     ball->Top = 240;
      x=-6;
      y=-6;
-     Label1->Visible = false;
-     newGame->Visible = false;
-     nextRound->Visible = false;
-     ballT->Enabled = true;
-     ball->Visible = true;
      Label2->Caption = "Iloœæ odbiæ";
      Label3->Caption = "Runda "+r;
+     startGame();
 }
 //---------------------------------------------------------------------------
+
 
 
 

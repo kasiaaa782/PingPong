@@ -1,10 +1,10 @@
 object Form1: TForm1
-  Left = 209
-  Top = 116
-  BorderStyle = bsToolWindow
+  Left = 191
+  Top = 91
+  BorderStyle = bsSingle
   Caption = ' PingPong v.1.'
   ClientHeight = 470
-  ClientWidth = 1021
+  ClientWidth = 1019
   Color = clBtnFace
   UseDockManager = True
   DockSite = True
@@ -42892,8 +42892,8 @@ object Form1: TForm1
     Layout = tlCenter
   end
   object ball: TShape
-    Left = 576
-    Top = 368
+    Left = 496
+    Top = 240
     Width = 25
     Height = 25
     Shape = stCircle
@@ -42928,7 +42928,7 @@ object Form1: TForm1
   end
   object nextRound: TButton
     Left = 376
-    Top = 184
+    Top = 176
     Width = 265
     Height = 57
     Cursor = crHandPoint
@@ -42945,7 +42945,7 @@ object Form1: TForm1
   end
   object newGame: TButton
     Left = 408
-    Top = 256
+    Top = 272
     Width = 201
     Height = 41
     Cursor = crHandPoint
