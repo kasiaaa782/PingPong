@@ -5,6 +5,7 @@
 #include "mmsystem.h"
 
 #include "Unit1.h"
+#include "Unit2.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 #pragma resource "*.dfm"
@@ -147,6 +148,8 @@ void __fastcall TForm1::ballTTimer(TObject *Sender)
           newGame->Visible = true;
           ballT->Enabled = false;
           ball->Visible = false;
+          //blokowanie ruchow paletki
+          Form1->OnKeyDown = FormKeyUp;
 
       } else if (ball->Left+ball->Width > p2->Left+p2->Width) {
           sndPlaySound("snd/przegrana.wav", SND_ASYNC);
@@ -170,6 +173,8 @@ void __fastcall TForm1::ballTTimer(TObject *Sender)
           newGame->Visible = true;
           ballT->Enabled = false;
           ball->Visible = false;
+          //blokowanie ruchow paletki
+          Form1->OnKeyDown = FormKeyUp;
       }
 }
 //---------------------------------------------------------------------------
@@ -192,6 +197,9 @@ void __fastcall TForm1::newGameClick(TObject *Sender)
      Label3->Caption = "Runda "+r;
      score->Caption = "Wynik";
      startGame();
+
+     //odblokowanie ruchow paletki
+     Form1->OnKeyDown = FormKeyDown;
 }
 //---------------------------------------------------------------------------
 
@@ -209,11 +217,27 @@ void __fastcall TForm1::nextRoundClick(TObject *Sender)
      Label2->Caption = "Iloœæ odbiæ";
      Label3->Caption = "Runda "+r;
      startGame();
+     //odblokowanie ruchow paletki
+     Form1->OnKeyDown = FormKeyDown;
 }
 //---------------------------------------------------------------------------
 
+void __fastcall TForm1::Oprogramie1Click(TObject *Sender)
+{
+     Form2->ShowModal();
+}
+//---------------------------------------------------------------------------
 
+void __fastcall TForm1::Autor1Click(TObject *Sender)
+{
+    ShellExecute(NULL, "open", "https://www.linkedin.com/in/katarzyna-niemiec-a99a62142/", NULL, NULL, SW_SHOWNORMAL);
+}
+//---------------------------------------------------------------------------
 
-
+void __fastcall TForm1::N1Click(TObject *Sender)
+{
+     Application->Terminate();
+}
+//---------------------------------------------------------------------------
 
 

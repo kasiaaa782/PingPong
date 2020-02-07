@@ -21,7 +21,6 @@ __published:	// IDE-managed Components
         TMenuItem *Opis1;
         TMenuItem *Zapiszgre1;
         TMenuItem *N1;
-        TMenuItem *Zakocz1;
         TMenuItem *Pomoc1;
         TMenuItem *Informacje1;
         TMenuItem *Oprogramie1;
@@ -53,6 +52,8 @@ __published:	// IDE-managed Components
         void __fastcall ballTTimer(TObject *Sender);
         void __fastcall nextRoundClick(TObject *Sender);
         void __fastcall newGameClick(TObject *Sender);
+        void __fastcall Oprogramie1Click(TObject *Sender);
+        void __fastcall Autor1Click(TObject *Sender);
 private:	// User declarations
 public:		// User declarations
         __fastcall TForm1(TComponent* Owner);

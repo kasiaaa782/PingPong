@@ -1,6 +1,6 @@
 object Form1: TForm1
-  Left = 191
-  Top = 91
+  Left = 232
+  Top = 142
   BorderStyle = bsSingle
   Caption = ' PingPong v.1.'
   ClientHeight = 470
@@ -42968,13 +42968,11 @@ object Form1: TForm1
         Caption = 'Opis'
       end
       object Zapiszgre1: TMenuItem
-        Caption = 'Zapisz gr'#281
-      end
-      object N1: TMenuItem
         Caption = '-'
       end
-      object Zakocz1: TMenuItem
+      object N1: TMenuItem
         Caption = 'Zako'#324'cz'
+        OnClick = N1Click
       end
     end
     object Pomoc1: TMenuItem
@@ -42983,9 +42981,11 @@ object Form1: TForm1
         Caption = 'Informacje'
         object Oprogramie1: TMenuItem
           Caption = 'O programie'
+          OnClick = Oprogramie1Click
         end
         object Autor1: TMenuItem
           Caption = 'O autorze'
+          OnClick = Autor1Click
         end
       end
     end
