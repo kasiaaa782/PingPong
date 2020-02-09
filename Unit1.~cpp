@@ -11,8 +11,8 @@
 #pragma resource "*.dfm"
 TForm1 *Form1;
 
-int x = -6;
-int y = -6;
+int x = -5;
+int y = -5;
 int player1 = 0;
 int player2 = 0;
 int round = 1;
@@ -118,33 +118,35 @@ void __fastcall TForm1::ballTTimer(TObject *Sender)
       if(ball->Top + ball->Height >= table->Top+table->Height) y = -y;
 
       //rozgrywka
-      if ( ball->Top > p1->Top-ball->Height/2 &&
-           ball->Top < p1->Top+p1->Height &&
-           ball->Left <= p1->Left+p1->Width){
-               if(ball->Top > p1->Top+40 && ball->Top+ball->Height < p1->Top+p1->Height-40){
+      if ( ball->Top+ball->Height/2 > p1->Top &&
+           ball->Top+ball->Height/2 < p1->Top+p1->Height &&
+           ball->Left < p1->Left+p1->Width){
+               if(ball->Top > p1->Top+30 && ball->Top+ball->Height < p1->Top+p1->Height-30){
                    x = 1.4*x;
                    y = 1.4*y;
+               }else {
+                   x = 1.1*x;
+                   y = 1.1*y;
                }
-               x = 1.1*x;
-               y = 1.1*y;
                sndPlaySound("snd/pilka.wav", SND_ASYNC);
                x = -x;
                refNumber++;
            }
-      else if ( ball->Top > p2->Top-ball->Height/2 &&
-                ball->Top < p2->Top+p2->Height &&
-                ball->Left+ball->Width >= p2->Left ){
-                   if(ball->Top > p2->Top+40 && ball->Top+ball->Height < p1->Top+p1->Height-40){
+      else if ( ball->Top+ball->Height/2 > p2->Top &&
+                ball->Top+ball->Height/2 < p2->Top+p2->Height &&
+                ball->Left+ball->Width > p2->Left ){
+                   if(ball->Top > p2->Top+30 && ball->Top+ball->Height < p2->Top+p2->Height-30){
                       x = 1.4*x;
                       y = 1.4*y;
+                   } else {
+                      x = 1.1*x;
+                      y = 1.1*y;
                    }
-                   x = 1.1*x;
-                   y = 1.1*y;
                    sndPlaySound("snd/pilka.wav", SND_ASYNC);
                    x = -x;
                    refNumber++;
                }
-      else if(ball->Left < p1->Left){
+      else if(ball->Left < p1->Left+p1->Width){
           sndPlaySound("snd/przegrana.wav", SND_ASYNC);
           player2++;
           pr1 = IntToStr(player1);
@@ -168,7 +170,7 @@ void __fastcall TForm1::ballTTimer(TObject *Sender)
           //blokowanie ruchow paletki
           Form1->OnKeyDown = FormKeyUp;
 
-      } else if (ball->Left+ball->Width > p2->Left+p2->Width) {
+      } else if (ball->Left+ball->Width > p2->Left) {
           sndPlaySound("snd/przegrana.wav", SND_ASYNC);
           player1++;
           pr1 = IntToStr(player1);
@@ -208,8 +210,8 @@ void __fastcall TForm1::newGameClick(TObject *Sender)
      player2 = 0;
      ball->Left = 496;
      ball->Top = 240;
-     x=-6;
-     y=-6;
+     x=-5;
+     y=-5;
      Label2->Caption = "Iloœæ odbiæ";
      Label3->Caption = "Runda "+r;
      score->Caption = "Wynik";
@@ -229,8 +231,8 @@ void __fastcall TForm1::nextRoundClick(TObject *Sender)
      p2->Top = 200;
      ball->Left = 496;
      ball->Top = 240;
-     x=-6;
-     y=-6;
+     x=-5;
+     y=-5;
      Label2->Caption = "Iloœæ odbiæ";
      Label3->Caption = "Runda "+r;
      startGame();

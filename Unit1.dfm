@@ -42863,17 +42863,17 @@ object Form1: TForm1
     Transparent = True
   end
   object p1: TShape
-    Left = 48
+    Left = 40
     Top = 200
     Width = 17
-    Height = 121
+    Height = 161
     Brush.Color = clMaroon
   end
   object p2: TShape
-    Left = 952
+    Left = 960
     Top = 200
     Width = 17
-    Height = 121
+    Height = 161
     Brush.Color = clMaroon
   end
   object Label1: TLabel
