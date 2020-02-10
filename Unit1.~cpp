@@ -10,14 +10,24 @@
 #pragma package(smart_init)
 #pragma resource "*.dfm"
 TForm1 *Form1;
+ 
+int x = 8;
+int y = 8;
+// szybkosc pilki
+int xFast = 16;
+int xSlow = 11;
 
-int x = -5;
-int y = -5;
 int player1 = 0;
 int player2 = 0;
+int bounceCounts = 0;
+int bounceFasterCounts = 0;
+int fasterMoveAfterXBounce = 1;
+int acceleration = 1;
 int round = 1;
-int refNumber = 0;
-AnsiString r, rNb, pr1, pr2;
+int initialBallInterval = 18;
+int maxBounceCounts = 0;
+
+AnsiString r, bC, pr1, pr2;
 
 void showGameDescription(){
      ShowMessage(
@@ -40,8 +50,8 @@ void startGame(){
      Form1->ball->Visible = true;
 }
 
-void stopGame(AnsiString rr, AnsiString rrNb){
-     Form1->Label2->Caption = "Iloœæ odbiæ: "+rrNb;
+void stopGame(AnsiString rr, AnsiString rbC){
+     Form1->Label2->Caption = "Iloœæ odbiæ: "+rbC;
      Form1->Label3->Caption = "Runda "+rr;
      Form1->Label1->Visible = true;
      Form1->nextRound->Visible = true;
@@ -101,52 +111,66 @@ void __fastcall TForm1::FormKeyUp(TObject *Sender, WORD &Key,
 void __fastcall TForm1::ballTTimer(TObject *Sender)
 {
       r = IntToStr(round);
-      rNb = IntToStr(refNumber);
+      bC = IntToStr(bounceCounts);
 
-      //zmiana kierunku pi³ki
-      if(round%2 == 0 ){
-         ball->Left -= x;
-         ball->Top -= y;
-      } else {
-         ball->Left += x;
-         ball->Top += y;
-      }
+      ball->Left += x;
+      ball->Top += y;
 
       //odbij od gornej sciany
       if(ball->Top <= table->Top+41) y = -y;
       //odbij od dolnej sciany
       if(ball->Top + ball->Height >= table->Top+table->Height) y = -y;
 
-      //rozgrywka
-      if ( ball->Top+ball->Height/2 > p1->Top &&
-           ball->Top+ball->Height/2 < p1->Top+p1->Height &&
-           ball->Left < p1->Left+p1->Width){
-               if(ball->Top > p1->Top+30 && ball->Top+ball->Height < p1->Top+p1->Height-30){
-                   x = 1.4*x-2;
-                   y = 1.4*y-2;
-               }else {
-                   x = 1.1*x;
-                   y = 1.1*y;
-               }
+      //odbicie od lewej paletki
+      if ( (ball->Top+ball->Height >= p1->Top) &&
+           (ball->Top <= p1->Top + p1->Height) &&
+           (ball->Left <= p1->Left+p1->Width) ){
+            if(x<0){
+               bounceCounts++;
                sndPlaySound("snd/pilka.wav", SND_ASYNC);
-               x = -x;
-               refNumber++;
-           }
-      else if ( ball->Top+ball->Height/2 > p2->Top &&
-                ball->Top+ball->Height/2 < p2->Top+p2->Height &&
-                ball->Left+ball->Width > p2->Left ){
-                   if(ball->Top > p2->Top+30 && ball->Top+ball->Height < p2->Top+p2->Height-30){
-                      x = 1.4*x-2;
-                      y = 1.4*y-2;
-                   } else {
-                      x = 1.1*x;
-                      y = 1.1*y;
-                   }
-                   sndPlaySound("snd/pilka.wav", SND_ASYNC);
-                   x = -x;
-                   refNumber++;
+               int quarterPaddle = p1->Height / 4; // 1/4 wysokosci paletki
+            // jesli pilka uderzyla posrodku paletki +/-25% jej wysokosci to odbijajac
+            // zmieniam jej kat przesuwania sie
+               if(  (ball->Top > p1->Top + quarterPaddle) &&
+                    (ball->Top+ball->Height <= p1->Top+p1->Height-quarterPaddle) )
+                   x = xFast;
+               else
+                   x = xSlow;
+               if( bounceFasterCounts >= fasterMoveAfterXBounce){
+                  bounceFasterCounts = 0;
+                  if (ballT->Interval - acceleration > 0)
+                  ballT->Interval -= acceleration;
                }
-      else if(ball->Left < p1->Left+p1->Width){
+               else
+                  bounceFasterCounts++;
+            }
+       }
+       //odbicie od prawej paletki
+      else if ( (ball->Top+ball->Height >= p2->Top) &&
+                (ball->Top <= p2->Top+p2->Height) &&
+                (ball->Left + ball->Width >= p2->Left) ){
+                if(x>0){
+                   bounceCounts++;
+                   sndPlaySound("snd/pilka.wav", SND_ASYNC);
+                   int quarterPaddle = p2->Height / 4; // 1/4 wysokosci paletki
+               // jesli pilka uderzyla posrodku paletki +/-25% jej wysokosci to odbijajac
+               // zmieniam jej kat przesuwania sie
+                   if( (ball->Top >= p2->Top + quarterPaddle) &&
+                       (ball->Top+ball->Height <= p2->Top+p2->Height-quarterPaddle))
+                      x = -xFast;
+                   else
+                      x = -xSlow;
+                   if(bounceFasterCounts >= fasterMoveAfterXBounce){
+                      bounceFasterCounts = 0;
+                      if (ballT->Interval - acceleration > 0)
+                          ballT->Interval -= acceleration;
+                   }
+                   else
+                      bounceFasterCounts++;
+               }
+      }
+      //przegrana po lewej stronie, punkt dla gracza 2 - prawego
+      else if(ball->Left <= p1->Left){
           sndPlaySound("snd/przegrana.wav", SND_ASYNC);
           player2++;
           pr1 = IntToStr(player1);
@@ -154,13 +178,20 @@ void __fastcall TForm1::ballTTimer(TObject *Sender)
           score->Caption = "Wynik "+pr1+":"+pr2;
           if(round < 10) {
             Label1->Caption = "Punkt dla gracza 2!    >";
-            stopGame(r, rNb);
+            stopGame(r, bC);
+            if(bounceCounts > maxBounceCounts){
+                maxBounceCounts = bounceCounts;
+            }
           } else {
             nextRound->Visible = false;
             if(player1 > player2){
                Label1->Caption = "Brawo! Zwyciê¿a gracz 1!";
+               Label4->Caption = "Najwiêksza iloœæ odbiæ: " + IntToStr(maxBounceCounts);
+               Label4->Visible = true;
             } else {
               Label1->Caption = "Brawo! Zwyciê¿a gracz 2!";
+              Label4->Caption = "Najwiêksza iloœæ odbiæ: " + IntToStr(maxBounceCounts);
+              Label4->Visible = true;
             }
             Label1->Visible = true;
           }
@@ -170,7 +201,9 @@ void __fastcall TForm1::ballTTimer(TObject *Sender)
           //blokowanie ruchow paletki
           Form1->OnKeyDown = FormKeyUp;
 
-      } else if (ball->Left+ball->Width > p2->Left) {
+      }
+      //przegrana po prawej stronie, punkt dla gracza 1 - lewego
+      else if (ball->Left > p2->Left) {
           sndPlaySound("snd/przegrana.wav", SND_ASYNC);
           player1++;
           pr1 = IntToStr(player1);
@@ -178,13 +211,20 @@ void __fastcall TForm1::ballTTimer(TObject *Sender)
           score->Caption = "Wynik "+pr1+":"+pr2;
           if(round < 10) {
             Label1->Caption = "<   Punkt dla gracza 1 !";
-            stopGame(r, rNb);
+            stopGame(r, bC);
+            if(bounceCounts > maxBounceCounts){
+                maxBounceCounts = bounceCounts;
+            }
           } else {
             nextRound->Visible = false;
             if(player1 > player2){
                Label1->Caption = "Brawo! Zwyciê¿a gracz 1!";
+               Label4->Caption = "Najwiêksza iloœæ odbiæ: " + IntToStr(maxBounceCounts);
+               Label4->Visible = true;
             } else {
               Label1->Caption = "Brawo! Zwyciê¿a gracz 2!";
+              Label4->Caption = "Najwiêksza iloœæ odbiæ: " + IntToStr(maxBounceCounts);
+              Label4->Visible = true;
             }
             Label1->Visible = true;
           }
@@ -200,9 +240,12 @@ void __fastcall TForm1::ballTTimer(TObject *Sender)
 
 void __fastcall TForm1::newGameClick(TObject *Sender)
 {
-     refNumber = 0;
+     bounceCounts = 0;
+     bounceFasterCounts = 0;
      round = 1;
      r = IntToStr(round);
+
+     Label4->Visible = false;
 
      p1->Top = 200;
      p2->Top = 200;
@@ -210,12 +253,16 @@ void __fastcall TForm1::newGameClick(TObject *Sender)
      player2 = 0;
      ball->Left = 496;
      ball->Top = 240;
-     x=-5;
-     y=-5;
+     if (x < 0)
+        x = xSlow;
+     else
+        x = -xSlow;
+
      Label2->Caption = "Iloœæ odbiæ";
      Label3->Caption = "Runda "+r;
      score->Caption = "Wynik";
      startGame();
+     ballT->Interval = initialBallInterval;
 
      //odblokowanie ruchow paletki
      Form1->OnKeyDown = FormKeyDown;
@@ -226,16 +273,20 @@ void __fastcall TForm1::nextRoundClick(TObject *Sender)
 {
      round++;
      r = IntToStr(round);
-     refNumber = 0;
+     bounceCounts = 0;
+     bounceFasterCounts = 0;
      p1->Top = 200;
      p2->Top = 200;
      ball->Left = 496;
      ball->Top = 240;
-     x=-5;
-     y=-5;
+     if (x < 0)
+        x = xSlow;
+     else
+        x = -xSlow;
      Label2->Caption = "Iloœæ odbiæ";
      Label3->Caption = "Runda "+r;
      startGame();
+     ballT->Interval = initialBallInterval;
      //odblokowanie ruchow paletki
      Form1->OnKeyDown = FormKeyDown;
 }

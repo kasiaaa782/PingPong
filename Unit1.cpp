@@ -22,10 +22,11 @@ int player2 = 0;
 int bounceCounts = 0;
 int bounceFasterCounts = 0;
 int fasterMoveAfterXBounce = 1;
-int acceleration = 1;
+int acceleration = 1;   //przyspieszenie
 int round = 1;
 int initialBallInterval = 18;
 int maxBounceCounts = 0;
+int firstStart = 1;
 
 AnsiString r, bC, pr1, pr2;
 
@@ -48,6 +49,7 @@ void startGame(){
      Form1->nextRound->Visible = false;
      Form1->ballT->Enabled = true;
      Form1->ball->Visible = true;
+     Form1->Label4->Visible = false;
 }
 
 void stopGame(AnsiString rr, AnsiString rbC){
@@ -129,8 +131,8 @@ void __fastcall TForm1::ballTTimer(TObject *Sender)
                bounceCounts++;
                sndPlaySound("snd/pilka.wav", SND_ASYNC);
                int quarterPaddle = p1->Height / 4; // 1/4 wysokosci paletki
-            // jesli pilka uderzyla posrodku paletki +/-25% jej wysokosci to odbijajac
-            // zmieniam jej kat przesuwania sie
+              // jesli pilka uderzyla posrodku paletki +/-25% jej wysokosci to odbijajac
+              // zmieniam jej kat przesuwania sie
                if(  (ball->Top > p1->Top + quarterPaddle) &&
                     (ball->Top+ball->Height <= p1->Top+p1->Height-quarterPaddle) )
                    x = xFast;
@@ -139,7 +141,7 @@ void __fastcall TForm1::ballTTimer(TObject *Sender)
                if( bounceFasterCounts >= fasterMoveAfterXBounce){
                   bounceFasterCounts = 0;
                   if (ballT->Interval - acceleration > 0)
-                  ballT->Interval -= acceleration;
+                      ballT->Interval -= acceleration;
                }
                else
                   bounceFasterCounts++;
@@ -153,8 +155,8 @@ void __fastcall TForm1::ballTTimer(TObject *Sender)
                    bounceCounts++;
                    sndPlaySound("snd/pilka.wav", SND_ASYNC);
                    int quarterPaddle = p2->Height / 4; // 1/4 wysokosci paletki
-               // jesli pilka uderzyla posrodku paletki +/-25% jej wysokosci to odbijajac
-               // zmieniam jej kat przesuwania sie
+                 // jesli pilka uderzyla posrodku paletki +/-25% jej wysokosci to odbijajac
+                 // zmieniam jej kat przesuwania sie
                    if( (ball->Top >= p2->Top + quarterPaddle) &&
                        (ball->Top+ball->Height <= p2->Top+p2->Height-quarterPaddle))
                       x = -xFast;
@@ -167,7 +169,7 @@ void __fastcall TForm1::ballTTimer(TObject *Sender)
                    }
                    else
                       bounceFasterCounts++;
-               }
+                }
       }
       //przegrana po lewej stronie, punkt dla gracza 2 - prawego
       else if(ball->Left <= p1->Left){
@@ -240,32 +242,58 @@ void __fastcall TForm1::ballTTimer(TObject *Sender)
 
 void __fastcall TForm1::newGameClick(TObject *Sender)
 {
-     bounceCounts = 0;
-     bounceFasterCounts = 0;
-     round = 1;
-     r = IntToStr(round);
+     if (firstStart == 1)
+     {
+        firstStart = 0;
+        bounceCounts = 0;
+        bounceFasterCounts = 0;
+        round = 1;
+        r = IntToStr(round);
+        p1->Top = 200;
+        p2->Top = 200;
+        player1 = 0;
+        player2 = 0;
+        ball->Left = 496;
+        ball->Top = 240;
+        if (x < 0)
+           x = xSlow;
+        else
+           x = -xSlow;
 
-     Label4->Visible = false;
+        Label2->Caption = "Iloœæ odbiæ";
+        Label3->Caption = "Runda "+r;
+        score->Caption = "Wynik";
+        startGame();
+        ballT->Interval = initialBallInterval;
+     }
+     else {
+        if (Application->MessageBox("Czy na pewno chcesz zacz¹æ od nowa?","PotwierdŸ",
+        MB_YESNO | MB_ICONQUESTION) == IDYES) {
+            firstStart = 0;
+            bounceCounts = 0;
+            bounceFasterCounts = 0;
+            round = 1;
+            r = IntToStr(round);
+            p1->Top = 200;
+            p2->Top = 200;
+            player1 = 0;
+            player2 = 0;
+            ball->Left = 496;
+            ball->Top = 240;
+            if (x < 0)
+               x = xSlow;
+            else
+               x = -xSlow;
 
-     p1->Top = 200;
-     p2->Top = 200;
-     player1 = 0;
-     player2 = 0;
-     ball->Left = 496;
-     ball->Top = 240;
-     if (x < 0)
-        x = xSlow;
-     else
-        x = -xSlow;
-
-     Label2->Caption = "Iloœæ odbiæ";
-     Label3->Caption = "Runda "+r;
-     score->Caption = "Wynik";
-     startGame();
-     ballT->Interval = initialBallInterval;
-
-     //odblokowanie ruchow paletki
-     Form1->OnKeyDown = FormKeyDown;
+            Label2->Caption = "Iloœæ odbiæ";
+            Label3->Caption = "Runda "+r;
+            score->Caption = "Wynik";
+            startGame();
+            ballT->Interval = initialBallInterval;
+            //odblokowanie ruchow paletki
+            Form1->OnKeyDown = FormKeyDown;
+        }
+     }
 }
 //---------------------------------------------------------------------------
 
