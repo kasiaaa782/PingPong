@@ -1,6 +1,6 @@
 object Form1: TForm1
-  Left = 205
-  Top = 180
+  Left = 235
+  Top = 122
   BorderStyle = bsSingle
   Caption = ' PingPong v.1.'
   ClientHeight = 470
@@ -42926,6 +42926,23 @@ object Form1: TForm1
     Font.Style = [fsBold]
     ParentFont = False
     Transparent = True
+  end
+  object Label4: TLabel
+    Left = 384
+    Top = 184
+    Width = 249
+    Height = 41
+    Alignment = taCenter
+    AutoSize = False
+    Caption = 'Najwi'#281'ksza ilo'#347#263' odbi'#263': '
+    Font.Charset = EASTEUROPE_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -21
+    Font.Name = 'Cambria'
+    Font.Style = []
+    ParentFont = False
+    Layout = tlCenter
+    Visible = False
   end
   object nextRound: TButton
     Left = 376

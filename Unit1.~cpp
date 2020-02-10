@@ -122,8 +122,8 @@ void __fastcall TForm1::ballTTimer(TObject *Sender)
            ball->Top+ball->Height/2 < p1->Top+p1->Height &&
            ball->Left < p1->Left+p1->Width){
                if(ball->Top > p1->Top+30 && ball->Top+ball->Height < p1->Top+p1->Height-30){
-                   x = 1.4*x;
-                   y = 1.4*y;
+                   x = 1.4*x-2;
+                   y = 1.4*y-2;
                }else {
                    x = 1.1*x;
                    y = 1.1*y;
@@ -136,8 +136,8 @@ void __fastcall TForm1::ballTTimer(TObject *Sender)
                 ball->Top+ball->Height/2 < p2->Top+p2->Height &&
                 ball->Left+ball->Width > p2->Left ){
                    if(ball->Top > p2->Top+30 && ball->Top+ball->Height < p2->Top+p2->Height-30){
-                      x = 1.4*x;
-                      y = 1.4*y;
+                      x = 1.4*x-2;
+                      y = 1.4*y-2;
                    } else {
                       x = 1.1*x;
                       y = 1.1*y;
